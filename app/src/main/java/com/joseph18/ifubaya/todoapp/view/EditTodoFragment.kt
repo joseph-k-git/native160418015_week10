@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import androidx.core.view.children
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.joseph18.ifubaya.todoapp.R
@@ -32,6 +34,12 @@ class EditTodoFragment : Fragment() {
 
         val uuid = EditTodoFragmentArgs.fromBundle(requireArguments()).uuid
 
+        btnCreateTodo.setOnClickListener() {
+            val selectedRadioButton = view.findViewById<RadioButton>(radioGroupPirority.checkedRadioButtonId)
+            val priorityLevel = Integer.parseInt(selectedRadioButton.tag.toString())
+            viewModel.updateTodo(txtTodoTitle.text.toString(), txtTodoNotes.text.toString(), priorityLevel, uuid = uuid)
+        }
+
         viewModel = ViewModelProvider(this).get(DetailTodoViewModel::class.java)
         viewModel.fetchTodo(uuid)
 
@@ -40,9 +48,18 @@ class EditTodoFragment : Fragment() {
 
     fun observeViewModel() {
         viewModel.todoLD.observe(viewLifecycleOwner, Observer {
-            Log.d("ToDo", it.toString())
             txtTodoTitle.setText(it.title)
             txtTodoNotes.setText(it.notes)
+            checkRadioButtonByPriority(it.priorityLevel)
         })
+    }
+
+    fun checkRadioButtonByPriority(priorityLevel :Int) {
+        (radioGroupPirority.children).forEach {
+            val radioButton = it as RadioButton
+            with (radioButton) {
+                this.isChecked = radioButton.tag.toString() == priorityLevel.toString()
+            }
+        }
     }
 }

@@ -6,9 +6,13 @@ import androidx.room.PrimaryKey
 
 @Entity//(tableName = "todo")
 data class Todo(
-    //@ColumnInfo(name = "title")
+
     var title :String,
+
     var notes :String,
+
+    @ColumnInfo(name = "priority")
+    var priorityLevel :Int,
 ) {
     @PrimaryKey(autoGenerate = true)
     var uuid :Int = 0

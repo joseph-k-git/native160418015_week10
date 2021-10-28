@@ -35,4 +35,11 @@ class DetailTodoViewModel(application :Application) : AndroidViewModel(applicati
             todoLD.value = db.todoDao().selectTodoByUuid(uuid)
         }
     }
+
+    fun updateTodo(title :String, notes :String, priorityLevel :Int, uuid :Int) {
+        launch {
+            val db = buildDb(getApplication())
+            db.todoDao().updateTodoByUuid(title, notes, priorityLevel, uuid)
+        }
+    }
 }
