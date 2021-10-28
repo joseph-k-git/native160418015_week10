@@ -14,7 +14,7 @@ interface TodoDao {
     suspend fun selectAllTodo() :List<Todo>
 
     @Query("SELECT * FROM todo WHERE uuid = :id")
-    suspend fun selectTodoByUuid(id :Int, uuid :String) :Todo
+    suspend fun selectTodoByUuid(id :Int) :List<Todo>
 
     @Delete
     suspend fun deleteTodo(todo :Todo)
