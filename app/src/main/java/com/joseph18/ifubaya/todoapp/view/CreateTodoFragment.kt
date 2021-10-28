@@ -37,7 +37,8 @@ class CreateTodoFragment : Fragment() {
             var todo = Todo(
                 title = txtTodoTitle.text.toString(),
                 notes = txtTodoNotes.text.toString(),
-                priorityLevel = Integer.parseInt(selectedRadioButton.tag.toString())
+                priorityLevel = Integer.parseInt(selectedRadioButton.tag.toString()),
+                isDone = 0
             )
             viewModel.addTodo(todo)
 

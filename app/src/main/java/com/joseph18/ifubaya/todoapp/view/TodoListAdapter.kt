@@ -27,6 +27,7 @@ class TodoListAdapter(val todoList :ArrayList<Todo>, val adapterOnClick :(Todo) 
             compoundButton, // compoundButton is the checkTask itself
             isChecked -> run {
                 if (isChecked) {
+                    todoList[position].isDone = 1
                     adapterOnClick(todoList[position])
                 }
             }

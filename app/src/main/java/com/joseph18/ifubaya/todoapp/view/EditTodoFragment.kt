@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.core.view.children
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.joseph18.ifubaya.todoapp.R
 import com.joseph18.ifubaya.todoapp.viewmodel.DetailTodoViewModel
 import kotlinx.android.synthetic.main.fragment_create_todo.*
@@ -37,7 +39,11 @@ class EditTodoFragment : Fragment() {
         btnCreateTodo.setOnClickListener() {
             val selectedRadioButton = view.findViewById<RadioButton>(radioGroupPirority.checkedRadioButtonId)
             val priorityLevel = Integer.parseInt(selectedRadioButton.tag.toString())
+
             viewModel.updateTodo(txtTodoTitle.text.toString(), txtTodoNotes.text.toString(), priorityLevel, uuid = uuid)
+
+            Toast.makeText(it.context, "ToDo Edited", Toast.LENGTH_SHORT).show()
+            Navigation.findNavController(it).popBackStack()
         }
 
         viewModel = ViewModelProvider(this).get(DetailTodoViewModel::class.java)
