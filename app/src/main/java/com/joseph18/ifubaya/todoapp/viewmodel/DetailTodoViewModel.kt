@@ -6,6 +6,7 @@ import androidx.room.Room
 import com.joseph18.ifubaya.todoapp.model.Todo
 import com.joseph18.ifubaya.todoapp.model.TodoDatabase
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
@@ -22,5 +23,5 @@ class DetailTodoViewModel(application :Application) : AndroidViewModel(applicati
     private val job = Job()
 
     override val coroutineContext: CoroutineContext
-        get() = TODO("Not yet implemented")
+        get() = job + Dispatchers.Main
 }
