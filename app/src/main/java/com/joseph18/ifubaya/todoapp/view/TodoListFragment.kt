@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.joseph18.ifubaya.todoapp.R
+import com.joseph18.ifubaya.todoapp.model.Todo
 import com.joseph18.ifubaya.todoapp.viewmodel.ListTodoViewModel
 import kotlinx.android.synthetic.main.fragment_todo_list.*
 
@@ -19,7 +20,7 @@ class TodoListFragment : Fragment() {
 
     private lateinit var viewModel :ListTodoViewModel
 
-    private var todoListAdapter :TodoListAdapter = TodoListAdapter(arrayListOf())
+    private var todoListAdapter :TodoListAdapter = TodoListAdapter(arrayListOf(), { item -> doClick(item) })
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,5 +55,9 @@ class TodoListFragment : Fragment() {
                 visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
             }
         })
+    }
+
+    fun doClick(item :Any) {
+        viewModel.clearTask(item as Todo)
     }
 }
