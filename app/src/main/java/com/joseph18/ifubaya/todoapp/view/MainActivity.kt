@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.joseph18.ifubaya.todoapp.R
 
@@ -15,7 +16,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Navigation.findNavController(this, R.id.hostFragment)
+        var navHostFragment = supportFragmentManager.findFragmentById(R.id.hostFragment) as NavHostFragment
+
+        navController = navHostFragment.navController
         NavigationUI.setupActionBarWithNavController(this, navController)
     }
 

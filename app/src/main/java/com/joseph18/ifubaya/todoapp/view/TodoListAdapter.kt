@@ -3,6 +3,7 @@ package com.joseph18.ifubaya.todoapp.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.joseph18.ifubaya.todoapp.R
 import com.joseph18.ifubaya.todoapp.model.Todo
@@ -23,7 +24,17 @@ class TodoListAdapter(val todoList :ArrayList<Todo>, val adapterOnClick :(Todo) 
         holder.view.checkTask.text = todoList[position].title
 
         holder.view.checkTask.setOnCheckedChangeListener() {
-                compoundButton, b -> adapterOnClick(todoList[position])
+            compoundButton, // compoundButton is the checkTask itself
+            isChecked -> run {
+                if (isChecked) {
+                    adapterOnClick(todoList[position])
+                }
+            }
+        }
+
+        holder.view.imgEdit.setOnClickListener() {
+            val action = TodoListFragmentDirections.actionEditTodoFragmentFromTodoListFragment(uuid = todoList[position].uuid)
+            Navigation.findNavController(it).navigate(action)
         }
     }
 
