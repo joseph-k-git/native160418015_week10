@@ -14,6 +14,12 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 class ListTodoViewModel(application :Application) : AndroidViewModel(application), CoroutineScope {
+
+    private val job = Job()
+
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main
+
     val todoLD = MutableLiveData<List<Todo>>()
 
     fun refresh() {
@@ -32,9 +38,4 @@ class ListTodoViewModel(application :Application) : AndroidViewModel(application
             todoLD.value = db.todoDao().selectAllTodo()
         }
     }
-
-    private val job = Job()
-
-    override val coroutineContext: CoroutineContext
-        get() = job + Dispatchers.Main
 }
