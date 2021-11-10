@@ -21,6 +21,7 @@ class TodoListAdapter(val todoList :ArrayList<Todo>, val adapterOnClick :(Todo) 
     }
 
     override fun onBindViewHolder(holder: TodoListViewHolder, position: Int) {
+        /*
         holder.view.checkTask.text = todoList[position].title + " " + todoList[position].priorityLevel.toString()
 
         holder.view.checkTask.setOnCheckedChangeListener() {
@@ -37,6 +38,8 @@ class TodoListAdapter(val todoList :ArrayList<Todo>, val adapterOnClick :(Todo) 
             val action = TodoListFragmentDirections.actionEditTodoFragmentFromTodoListFragment(uuid = todoList[position].uuid)
             Navigation.findNavController(it).navigate(action)
         }
+
+         */
     }
 
     override fun getItemCount(): Int {
